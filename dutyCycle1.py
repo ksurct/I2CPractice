@@ -5,6 +5,10 @@
 from __future__ import division
 import time
 
+
+#ksurct attempting to interface xbox -- WIP
+import xbox
+
 # Import the PCA9685 module
 import Adafruit_PCA9685
 
@@ -49,7 +53,7 @@ try:
 #   pwm.set_pwm(0, 0, servo_max)
 #   time.sleep(1)
 
-   new_pwm = raw_input("input int:")
+   new_pwm = input("input int:")
    new_pwm = int(new_pwm)
    pwm.set_pwm(0, 0, new_pwm)
 
