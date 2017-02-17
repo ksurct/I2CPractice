@@ -36,24 +36,16 @@ def set_servo_pulse(channel, pulse):
     pulse //= pulse_length
     pwm.set_pwm(channel, 0, pulse)
 
-# Set frequency to 60hz, good for servos.
+# Set frequency to 10khz for our motors.
 pwm.set_pwm_freq(10000)
 
-print('Moving servo on channel 0, press Ctrl-C to quit...')
+print('Enter value between 0 and 4000 for the motors:')
 # 'try' is used to check for a ctrl+c break -- on ctrl+c, we move to 'finally'
 try:
   while True:
-    # Move servo on channel O between extremes.
-    # pwm.set_pwm(0, 0, servo_min)
-    #time.sleep(1)
-    #pwm.set_pwm(0, 0, servo_max)
-    #time.sleep(1)
-    
-    response = int(input())
-    pwm.set_pwm(15,0, response)
-#   print(response)
-    #pwm.set_pwm(15, 0, 10000)
-    
+    response = int(input())  # Convert string into actual numerical value to transmit to motor.
+    pwm.set_pwm(15, 0, response) # Set channel 15 on board (motor) to the 0-4000 value.
+
 # Generates an exception to remove common ctrl+c error
 except KeyboardInterrupt :
     pass
