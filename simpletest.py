@@ -37,7 +37,7 @@ def set_servo_pulse(channel, pulse):
     pwm.set_pwm(channel, 0, pulse)
 
 # Set frequency to 60hz, good for servos.
-pwm.set_pwm_freq(50)
+pwm.set_pwm_freq(10000)
 
 print('Moving servo on channel 0, press Ctrl-C to quit...')
 # 'try' is used to check for a ctrl+c break -- on ctrl+c, we move to 'finally'
@@ -48,7 +48,11 @@ try:
     #time.sleep(1)
     #pwm.set_pwm(0, 0, servo_max)
     #time.sleep(1)
-    pwm.set_pwm(15, 0, 2048)
+    
+    response = int(input())
+    pwm.set_pwm(15,0, response)
+#   print(response)
+    #pwm.set_pwm(15, 0, 10000)
     
 # Generates an exception to remove common ctrl+c error
 except KeyboardInterrupt :
