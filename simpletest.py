@@ -14,7 +14,8 @@ import Adafruit_PCA9685
 #logging.basicConfig(level=logging.DEBUG)
 
 # Initialise the PCA9685 using the default address (0x40).
-pwm = Adafruit_PCA9685.PCA9685()
+#servopwm = Adafruit_PCA9685.PCA9685(0x40)
+motorpwm = Adafruit_PCA9685.PCA9685(0x41)
 
 # Alternatively specify a different address and/or bus:
 #pwm = Adafruit_PCA9685.PCA9685(address=0x41, busnum=2)
@@ -36,20 +37,22 @@ def set_servo_pulse(channel, pulse):
     pulse //= pulse_length
     pwm.set_pwm(channel, 0, pulse)
 
-# Set frequency to 10khz for our motors.
-pwm.set_pwm_freq(10000)
+# Set frequency to 1.6kHz for our motors/
+#servopwm.set_pwm_freq(60)
+motorpwm.set_pwm_freq(1600)
 
 print('Enter value between 0 and 4000 for the motors:')
 # 'try' is used to check for a ctrl+c break -- on ctrl+c, we move to 'finally'
 try:
   while True:
     response = int(input())  # Convert string into actual numerical value to transmit to motor.
-    pwm.set_pwm(15, 0, response) # Set channel 15 on board (motor) to the 0-4000 value.
-
+ #   servopwm.set_pwm(0, 0, response) # Set channel 15 on board (motor) to the 0-4000 value.
+    motorpwm.set_pwm(0, 0, response)
 # Generates an exception to remove common ctrl+c error
 except KeyboardInterrupt :
     pass
 
 # 'finally' is thrown to, once 'try' catches a ctrl+c at the commmand line
 finally:
-    pwm.set_pwm(15,0,0)
+  #  servopwm.set_pwm(0,0,0)
+    motorpwm.set_pwm(0,0,0)
